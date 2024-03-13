@@ -1,4 +1,4 @@
 return {
 	'Exafunction/codeium.vim',
-	enabled = true,
+	enabled = false,
 }
