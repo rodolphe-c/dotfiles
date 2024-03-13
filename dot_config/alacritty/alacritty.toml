@@ -1,0 +1,18 @@
+live_config_reload = true
+import = [
+	"~/.config/alacritty/themes/themes/rose-pine-dawn.toml",
+]
+
+[window]
+decorations = "Buttonless"
+opacity = 1
+blur = true
+
+[font]
+normal = { family = "MesloLGS NF", style = "Regular" }
+bold = { family = "MesloLGS NF", style = "Bold" }
+italic = { family = "MesloLGS NF", style = "Italic" }
+size = 14
+
+[selection]
+save_to_clipboard = true
