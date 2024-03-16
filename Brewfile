@@ -1,4 +1,3 @@
-tap "felixkratz/formulae"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
@@ -33,6 +32,7 @@ cask "aerospace"
 cask "alacritty"
 cask "alt-tab"
 cask "docker"
+cask "font-meslo-for-powerlevel10k"
 cask "raycast"
 cask "zed"
 mas "Keymapp", id: 6472865291
