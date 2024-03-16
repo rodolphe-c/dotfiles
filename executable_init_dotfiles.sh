@@ -37,12 +37,21 @@ setup_macos() {
 	git clone https://github.com/alacritty/alacritty-theme "${HOME}/.config/alacritty/themes"
 
 	# Sketchybar icons
-	curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.23/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
-
+	#curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.23/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
 
 	# macOS settings
-	defaults write NSGlobalDomain _HIHideMenuBar -bool true
+	#defaults write NSGlobalDomain _HIHideMenuBar -bool true
+	#defaults write com.apple.dock autohide -bool true
+	#defaults write com.apple.dock autohide-time-modifier -float 0.15
+	#defaults write -g NSWindowShouldDragOnGesture YES
+	#defaults write com.apple.dock expose-animation-duration -float 0.1
+	#defaults write com.apple.dock missioncontrol-animation-duration -float 0.1
+	#killall Dock
+	#killall Finder
 
+	# Setup dev env
+	/opt/homebrew/bin/rustup-init -y
+	/opt/homebrew/bin/opam init -y
 
 	# Refresh zsh
 	/opt/homebrew/bin/zsh
