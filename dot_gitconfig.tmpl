@@ -1,6 +1,8 @@
+{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $username := promptStringOnce . "username" "Username" -}}
 [user]
-	email = {{ .email | quote }}
-	user = {{ .user | quote }}
+	email = {{ $email | quote }}
+	name = {{ $username | quote }}
 [alias]
 	co = checkout
 	br = branch
