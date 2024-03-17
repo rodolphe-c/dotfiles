@@ -1,6 +1,6 @@
 [user]
-	email = "rodolphe.cargnello@gmail.com"
-	user = "Rodolphe Cargnello"
+	email = {{ .email | quote }}
+	user = {{ .user | quote }}
 [alias]
 	co = checkout
 	br = branch
