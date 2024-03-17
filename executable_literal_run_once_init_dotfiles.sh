@@ -27,9 +27,6 @@ setup_macos() {
 		git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 	fi
 
-	# chezmoi dotfiles manager
-	/opt/homebrew/bin/brew install chezmoi
-	/opt/homebrew/bin/chezmoi init --apply rodolphe-c
 	/opt/homebrew/bin/brew bundle install
 
 	# Alacritty themes
