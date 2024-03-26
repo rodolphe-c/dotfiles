@@ -33,6 +33,11 @@ setup_macos() {
 	mkdir -p "${HOME}/.config/alacritty/themes"
 	git clone https://github.com/alacritty/alacritty-theme "${HOME}/.config/alacritty/themes"
 
+	# tmux
+	git clone https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
+
+	git clone https://github.com/rose-pine/btop.git "${HOME}/.config/btop/themes"
+
 	# Sketchybar icons
 	#curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.23/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
 
