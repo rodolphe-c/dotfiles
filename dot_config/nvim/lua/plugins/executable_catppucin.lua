@@ -1,6 +1,6 @@
 return {
 	'catppuccin/nvim',
-	enabled = true,
+	enabled = false,
 	cond = not vim.g.vscode,
 	name = 'catppuccin',
 	priority = 1000,
