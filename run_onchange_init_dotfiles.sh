@@ -8,9 +8,9 @@ setup_macos() {
 	fi
 
 	# Rosetta 2
-	if [[ ! $(/usr/bin/pgrep -q oahd; echo $?) ]]; then
-		echo "Install rosetta 2"
-		softwareupdate --install-rosetta
+	if ! (arch -arch x86_64 uname -m > /dev/null) ; then
+		echo "Install Rosetta 2"
+		softwareupdate --install-rosetta --agree-to-license
 	fi
 
 	# Homebrew
