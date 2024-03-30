@@ -36,7 +36,17 @@ setup_macos() {
 	# tmux
 	git clone https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
 
-	git clone https://github.com/rose-pine/btop.git "${HOME}/.config/btop/themes"
+	mkdir -p "${HOME}/.config/btop/themes"
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_latte.theme
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_frappe.theme
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_macchiato.theme
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_mocha.theme
+
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine-dawn.theme
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine-moon.theme
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine.theme
+
+	#git clone https://github.com/rose-pine/btop.git "${HOME}/.config/btop/themes"
 
 	# Sketchybar icons
 	#curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.23/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
