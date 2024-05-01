@@ -63,7 +63,7 @@ setup_macos() {
 
 	# Setup dev env
 	/opt/homebrew/bin/rustup-init -y
-	/opt/homebrew/bin/opam init -y
+	#/opt/homebrew/bin/opam init -y
 
 	# Refresh zsh
 	/opt/homebrew/bin/zsh
