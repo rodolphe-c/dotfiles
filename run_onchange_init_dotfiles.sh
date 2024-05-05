@@ -70,7 +70,23 @@ setup_macos() {
 }
 
 setup_linux() {
-	echo "Not implemented"
+	# Alacritty themes
+	mkdir -p "${HOME}/.config/alacritty/themes"
+	git clone https://github.com/alacritty/alacritty-theme "${HOME}/.config/alacritty/themes"
+
+	# tmux
+	git clone https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
+
+	mkdir -p "${HOME}/.config/btop/themes"
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_latte.theme
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_frappe.theme
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_macchiato.theme
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_mocha.theme
+
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine-dawn.theme
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine-moon.theme
+	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine.theme
+
 }
 
 if [[ "$(uname)" == "Darwin" ]]; then
