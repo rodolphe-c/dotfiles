@@ -10,9 +10,14 @@ return {
 		{ 'hrsh7th/cmp-nvim-lsp' },
 		{ 'hrsh7th/nvim-cmp' },
 		{ 'L3MON4D3/LuaSnip' },
+		{ "folke/neodev.nvim",                opts = {} },
 	},
 	config = function()
 		-- LSP
+		require("neodev").setup({
+			library = { plugins = { "nvim-dap-ui" }, types = true },
+		})
+
 
 		local lsp_zero = require('lsp-zero')
 
