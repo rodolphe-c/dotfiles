@@ -1,24 +1,39 @@
 #!/usr/bin/env bash
 
-setup_macos() {
-	# Xcode commande line tools
+install_xcode() {
 	if [[ ! $(xcode-select -p 1>/dev/null; echo $?) ]]; then
 		echo "Install xcode commandline tools"
 		xcode-select --install
 	fi
+}
 
-	# Rosetta 2
+install_rosetta() {
 	if ! (arch -arch x86_64 uname -m > /dev/null) ; then
 		echo "Install Rosetta 2"
 		softwareupdate --install-rosetta --agree-to-license
 	fi
+}
 
-	# Homebrew
+install_brew() {
 	if [[ $(command -v brew) == "" ]]; then
 		echo "Install homebrew"
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	fi
 
+	if ! (arch -arch x86_64 uname -m > /dev/null) ; then
+		BREW_PREFIX="/opt/homebrew/bin"
+	else
+		BREW_PREFIX="/usr/local/bin"
+	fi
+
+	echo "Install brew bundle"
+	"${BREW_PREFIX}/brew" bundle install
+	"${BREW_PREFIX}/rustup-init" -y
+	"${BREW_PREFIX}/opam" init -y
+}
+
+install_ohmyzsh() {
+	echo "Install ohmyzsh"
 	if [ ! -d "${HOME}/.oh-my-zsh" ]; then
 		git clone --recurse-submodules https://github.com/ohmyzsh/ohmyzsh.git "${HOME}/.oh-my-zsh"
 	fi
@@ -26,71 +41,59 @@ setup_macos() {
 	if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
 		git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 	fi
-
-	/opt/homebrew/bin/brew bundle install
-
-	# Alacritty themes
-	mkdir -p "${HOME}/.config/alacritty/themes"
-	git clone https://github.com/alacritty/alacritty-theme "${HOME}/.config/alacritty/themes"
-
-	# tmux
-	git clone https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
-
-	mkdir -p "${HOME}/.config/btop/themes"
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_latte.theme
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_frappe.theme
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_macchiato.theme
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_mocha.theme
-
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine-dawn.theme
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine-moon.theme
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine.theme
-
-	#git clone https://github.com/rose-pine/btop.git "${HOME}/.config/btop/themes"
-
-	# Sketchybar icons
-	#curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.23/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
-
-	# macOS settings
-	#defaults write NSGlobalDomain _HIHideMenuBar -bool true
-	#defaults write com.apple.dock autohide -bool true
-	#defaults write com.apple.dock autohide-time-modifier -float 0.15
-	#defaults write -g NSWindowShouldDragOnGesture YES
-	#defaults write com.apple.dock expose-animation-duration -float 0.1
-	#defaults write com.apple.dock missioncontrol-animation-duration -float 0.1
-	#killall Dock
-	#killall Finder
-
-	# Setup dev env
-	/opt/homebrew/bin/rustup-init -y
-	#/opt/homebrew/bin/opam init -y
-
-	# Refresh zsh
-	/opt/homebrew/bin/zsh
 }
 
-setup_linux() {
-	# Alacritty themes
-	mkdir -p "${HOME}/.config/alacritty/themes"
-	git clone https://github.com/alacritty/alacritty-theme "${HOME}/.config/alacritty/themes"
-
-	# tmux
-	git clone https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
-
-	mkdir -p "${HOME}/.config/btop/themes"
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_latte.theme
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_frappe.theme
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_macchiato.theme
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_mocha.theme
-
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine-dawn.theme
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine-moon.theme
-	curl -LO --output-dir "${HOME}/.config/btop/themes" https://raw.githubusercontent.com/rose-pine/btop/main/rose-pine.theme
-
+install_alacritty_themes() {
+	echo "Install alacritty themes"
+	if [ ! -d "${HOME}/.config/alacritty/themes" ]; then
+		mkdir -p "${HOME}/.config/alacritty/themes"
+		git clone https://github.com/alacritty/alacritty-theme "${HOME}/.config/alacritty/themes"
+	fi
 }
 
-if [[ "$(uname)" == "Darwin" ]]; then
-	setup_macos 
-elif [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
-	setup_linux
-fi
+install_deps() {
+	echo "Install dependencies"
+	if [[ "$(uname)" == "Darwin" ]]; then
+		install_xcode
+		install_rosetta
+		install_brew
+	elif [[ $(command -v yay) != "" ]]; then
+		yay -S --needed --noconfirm base-devel \
+			alacritty \
+			tmux \
+			fd \
+			zsh \
+			ripgrep \
+			git \
+			neofetch \
+			neovim \
+			fzf \
+			doxygen \
+			ninja \
+			cmake \
+			clang \
+			rustup \
+			opam \
+			btop
+
+	elif [[ $(command -v dnf) != "" ]]; then
+		echo "TODO"
+	elif [[ $(command -v apt) != "" ]]; then
+		echo "TODO"
+	fi
+
+	rm "${HOME}/Brewfile"
+}
+
+setup() {
+	# Install deps
+	install_deps
+
+	# ohmyzsh
+	install_ohmyzsh
+
+	# Alacritty themes
+	install_alacritty_themes
+}
+
+setup

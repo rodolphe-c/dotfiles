@@ -1,6 +1,6 @@
 live_config_reload = true
 import = [
-	"~/.config/alacritty/themes/themes/catppucin-frappe.toml",
+	"~/.config/alacritty/themes/themes/gruvbox_dark.toml",
 ]
 
 [window]
@@ -13,7 +13,7 @@ option_as_alt = "Both"
 normal = { family = "MesloLGS NF", style = "Regular" }
 bold = { family = "MesloLGS NF", style = "Bold" }
 italic = { family = "MesloLGS NF", style = "Italic" }
-size = 14
+size = 10
 
 [selection]
 save_to_clipboard = true

@@ -1,1 +1,4 @@
-return { 'ThePrimeagen/vim-be-good', enabled = true }
+return {
+	'ThePrimeagen/vim-be-good',
+	enabled = true
+}
