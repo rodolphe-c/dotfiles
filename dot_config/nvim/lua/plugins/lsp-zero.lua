@@ -130,14 +130,15 @@ return {
 			dapui.close()
 		end
 
+		local mason_registry = require('mason-registry')
+		local codelldb_path = mason_registry.get_package("codelldb"):get_install_path() .. '/codelldb'
 		dap.adapters.codelldb = {
 			type = 'server',
 			port = "${port}",
 			executable = {
 				-- CHANGE THIS to your path!
-				command = '/absolute/path/to/codelldb/extension/adapter/codelldb',
+				command = codelldb_path,
 				args = { "--port", "${port}" },
-
 				-- On windows you may have to uncomment this:
 				-- detached = false,
 			}
