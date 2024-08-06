@@ -77,4 +77,3 @@ cask "reaper"
 cask "steam"
 cask "visual-studio-code"
 cask "zed"
-mas "Keymapp", id: 6472865291
