@@ -7,7 +7,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
-export TERM=xterm-256color
+export TERM=alacritty
 
 alias vim="nvim"
 {{ if eq .chezmoi.os "darwin" }}
@@ -31,4 +31,5 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 alias ls="eza --icons"
 alias cd="z"
 eval "$(zoxide init zsh)"
+eval "$(atuin init zsh --disable-up-arrow)"
 
