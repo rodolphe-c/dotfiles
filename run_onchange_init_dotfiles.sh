@@ -29,25 +29,12 @@ install_brew() {
 	echo "Install brew bundle"
 	"${BREW_PREFIX}/brew" bundle install
 	"${BREW_PREFIX}/rustup-init" -y
-	"${BREW_PREFIX}/opam" init -y
 }
 
-install_ohmyzsh() {
+install_themes() {
 	echo "Install ohmyzsh"
-	if [ ! -d "${HOME}/.oh-my-zsh" ]; then
-		git clone --recurse-submodules https://github.com/ohmyzsh/ohmyzsh.git "${HOME}/.oh-my-zsh"
-	fi
-
-	if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
-		git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-	fi
-}
-
-install_alacritty_themes() {
-	echo "Install alacritty themes"
-	if [ ! -d "${HOME}/.config/alacritty/themes" ]; then
-		mkdir -p "${HOME}/.config/alacritty/themes"
-		git clone https://github.com/alacritty/alacritty-theme "${HOME}/.config/alacritty/themes"
+	if [ ! -d "${HOME}/.config/yazi/flavors/tokyo-night.yazi" ]; then
+		git clone https://github.com/BennyOe/tokyo-night.yazi.git "${HOME}/.config/yazi/flavors/tokyo-night.yazi"
 	fi
 }
 
@@ -57,66 +44,8 @@ install_deps() {
 		install_xcode
 		install_rosetta
 		install_brew
-	elif [[ $(command -v yay) != "" ]]; then
-		yay -S --needed --noconfirm base-devel \
-			alacritty \
-			tmux \
-			fd \
-			zsh \
-			ripgrep \
-			git \
-			neofetch \
-			neovim \
-			fzf \
-			doxygen \
-			ninja \
-			cmake \
-			clang \
-			rustup \
-			opam \
-			btop
-
-	elif [[ $(command -v dnf) != "" ]]; then
-		echo "TODO"
-	elif [[ $(lsb_release -d | grep Debian 2> /dev/null) != "" ]]; then
-		sudo apt update && sudo apt upgrade -y
-		sudo apt install -y \
-			curl \
-			git \
-			cmake \
-			valgrind \
-			ccache \
-			python3 \
-			wget \
-			llvm \
-			clang \
-			gcc \
-			g++ \
-			zsh \
-			neovim \
-			zsh-syntax-highlighting \
-			zsh-autosuggestions \
-			zoxide \
-			opam \
-			eza \
-			ripgrep \
-			fd-find \
-			luarocks \
-			tree-sitter-cli \
-			btop \
-			doxygen \
-			ninja-build \
-			tmux \
-			rustup \
-			python3-venv
-		git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.fzf"
-		"${HOME}/.fzf/install"
-		curl https://pyenv.run | bash
-		wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-		export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-		[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-		nvm install node
-		bash -c  "$(curl -fsSL https://raw.githubusercontent.com/officialrajdeepsingh/nerd-fonts-installer/main/install.sh)"
+	else
+		echo "Unsupported platform"
 	fi
 
 	rm "${HOME}/Brewfile"
@@ -126,11 +55,8 @@ setup() {
 	# Install deps
 	install_deps
 
-	# ohmyzsh
-	install_ohmyzsh
-
-	# Alacritty themes
-	install_alacritty_themes
+	# themes
+	install_themes
 }
 
 setup

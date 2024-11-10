@@ -1,0 +1,10 @@
+[manager]
+show_hidden = true
+
+[flavor]
+use = 'tokyo-night'
+
+[opener]
+edit = [
+{ run = 'nvim "$@"', block = true, for = 'unix'},
+]
