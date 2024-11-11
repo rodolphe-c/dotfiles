@@ -1,11 +1,14 @@
+tap "buo/cask-upgrade"
 tap "felixkratz/formulae"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "nikitabobko/tap"
+brew "python@3.13"
+brew "asitop"
 brew "atuin"
 brew "btop", args: ["HEAD"]
-brew "python@3.13"
 brew "ccache", args: ["HEAD"]
+brew "chezmoi"
 brew "cmake"
 brew "colima", args: ["HEAD"]
 brew "curl"
@@ -27,6 +30,7 @@ brew "ninja"
 brew "node"
 brew "nushell", args: ["HEAD"]
 brew "ollama", args: ["HEAD"], restart_service: true
+brew "opam"
 brew "pyenv"
 brew "qemu"
 brew "ripgrep"
