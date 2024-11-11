@@ -13,6 +13,8 @@ $golang\
 $php\
 [](fg:#212736 bg:#1d2230)\
 $time\
+$cmd_duration\
+$status\
 [ ](fg:#1d2230)\
 \n$character"""
 
@@ -63,3 +65,14 @@ disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+
+[cmd_duration]
+min_time = 500
+format = '[[ $duration](fg:#a0a9cb bg:#1d2230 bold yellow)]($style)'
+
+[status]
+symbol = '🔴'
+success_symbol = '🟢'
+format = '[[ $symbol$common_meaning$signal_name$maybe_int](fg:#a0a9cb bg:#1d2230)]($style)'
+map_symbol = true
+disabled = false
